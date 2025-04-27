@@ -7,17 +7,31 @@ from error_handling import err_checker
 from calculations_library import calculate_net_tax_liability
 
 # Get the user's yearly salary income
-command = "Please enter your yearly gross W-2 income: $"
-w2_income = input(command)
+command = "Please enter your annual base salary: $"
+ann_salary = input(command)
 # Sanity checks
-w2_income = err_checker(w2_income, command, 30000, 500000)
+ann_salary = err_checker(ann_salary, command, 30000, 500000)
+
+# Get the user's yearly RSU income
+command = "Please enter your yearly RSU income, if you have: $"
+rsu_income = input(command)
+# Sanity checks
+rsu_income = err_checker(rsu_income, command, 0, 100000)
+
+# Get the user's yearly Bonus income
+command = "Please enter your estimated yearly Bonus Income: $"
+bonus_income = input(command)
+# Sanity checks
+bonus_income = err_checker(bonus_income, command, 0, 100000)
+
+w2_income = ann_salary + rsu_income + bonus_income
 
 # Get the 401(k) contribution percentage
 command = "Enter the % of your salary to contribute to your 401(k): %"
 contribution_percentage = input(command)
 contribution_percentage = err_checker(contribution_percentage, command, 0, 85)
 
-cont_401k = calculate_401k(contribution_percentage, w2_income)
+cont_401k = calculate_401k(contribution_percentage, ann_salary)
 print(input(f"Your 401k contribution amount is ${cont_401k:.2f}. Press enter to continue..."))
 
 # Get the HSA contribution amount
