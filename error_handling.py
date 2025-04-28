@@ -7,7 +7,7 @@ def err_checker(variable, command, min_val, max_val):
 
 
 def is_digit_check(variable, command):
-    while not variable.isdigit():
+    while not variable.lstrip("-").isdigit():
         print('Enter Numbers Only')
         variable = input(command)
     return variable

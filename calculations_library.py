@@ -7,9 +7,9 @@ def calculate_401k(contribution_percentage,w2_income):
 
 
 def calculate_net_income(w2_income, cont_401k, hsa_cont_amount, dcfsa_cont_amount, hcfsa_cont_amount,
-                         stock_short_gain, stock_short_loss, dividend_gain,other_income):
+                         stock_short_gain, dividend_gain, other_income):
     net_income = (w2_income - cont_401k - hsa_cont_amount - dcfsa_cont_amount
-                  - hcfsa_cont_amount + stock_short_gain - stock_short_loss + dividend_gain + other_income)
+                  - hcfsa_cont_amount + stock_short_gain + dividend_gain + other_income)
     return net_income
 
 
@@ -28,6 +28,9 @@ def calculate_tax_liability(agi):
     tax_liability = tax_liability + remaining * tax_brackets[i]
     return tax_liability
 
+def calculate_long_tax (stock_long_gain):
+    long_tax = stock_long_gain * 0.15
+    return long_tax
 
 def calculate_net_tax_liability(tax_liability, child_credit_amount, other_credit_amount):
     net_tax_liability = tax_liability - child_credit_amount - other_credit_amount
